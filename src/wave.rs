@@ -1,11 +1,14 @@
-use crate::animation::Animation;
+use crate::{
+    animation::Animation, animation_custom_colors::AnimationCustomColors,
+    animation_speed::AnimationSpeed,
+};
 
 #[derive(Debug)]
 pub struct Wave {
     pub direction: Option<WaveDirection>,
-    pub speed: Option<WaveSpeed>,
+    pub speed: Option<AnimationSpeed>,
     pub theme: Option<WaveTheme>,
-    pub custom_colors: Option<CustomWaveColors>,
+    pub custom_colors: Option<AnimationCustomColors>,
 }
 
 impl Animation for Wave {
@@ -28,33 +31,7 @@ impl Animation for Wave {
 
         // custom colors
         if let Some(val) = &self.custom_colors {
-            bytes[6] = (val.colors.len() - 1) as u8;
-
-            for (index, color) in val.colors.iter().enumerate() {
-                match index {
-                    0 => {
-                        bytes[10] = color.r;
-                        bytes[11] = color.g;
-                        bytes[12] = color.b;
-                    }
-                    1 => {
-                        bytes[13] = color.r;
-                        bytes[14] = color.g;
-                        bytes[15] = color.b;
-                    }
-                    2 => {
-                        bytes[16] = color.r;
-                        bytes[17] = color.g;
-                        bytes[18] = color.b;
-                    }
-                    3 => {
-                        bytes[19] = color.r;
-                        bytes[20] = color.g;
-                        bytes[21] = color.b;
-                    }
-                    _ => {}
-                }
-            }
+            val.set_colors_in_buffer(bytes);
         }
 
         empty_buf
@@ -76,14 +53,10 @@ impl Wave {
         }
     }
 
-    fn binary_for_speed(&self) -> u8 {
+    pub fn binary_for_speed(&self) -> u8 {
         match &self.speed {
-            Some(sp) => match sp {
-                WaveSpeed::Slow => 0x00,
-                WaveSpeed::Medium => 0x01,
-                WaveSpeed::Fast => 0x02,
-            },
-            None => 0x01, // Medium
+            Some(val) => AnimationSpeed::binary_for_speed(val),
+            None => AnimationSpeed::default(),
         }
     }
 
@@ -112,13 +85,6 @@ pub enum WaveDirection {
 }
 
 #[derive(Debug)]
-pub enum WaveSpeed {
-    Slow,
-    Medium,
-    Fast,
-}
-
-#[derive(Debug)]
 pub enum WaveTheme {
     Custom,
     Volcano,
@@ -126,52 +92,3 @@ pub enum WaveTheme {
     Ocean,
     Galaxy,
 }
-
-#[derive(Debug)]
-pub struct CustomWaveColors {
-    pub colors: Vec<Color>,
-}
-
-#[derive(Debug)]
-pub struct Color {
-    r: u8,
-    g: u8,
-    b: u8,
-}
-
-impl Color {
-    pub fn from(r: u8, g: u8, b: u8) -> Color {
-        Color { r, g, b }
-    }
-}
-
-// pub fn get_wave(config: WaveConfig) -> Vec<Vec<u8>> {
-//     // binary direction
-//     let bd = config.binary_for_direction();
-//     // binary speed
-//     let bs = config.binary_for_speed();
-//     // binary theme
-//     let bt = config.binary_for_theme();
-
-//     let r = 0xe5;
-//     let g = 0x00;
-//     let b = 0x50;
-
-//     let wave: Vec<Vec<u8>> = vec![
-//         vec![
-//             0x09, 0x00, 0x01, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//         ],
-//         vec![
-//             0x03, 0x06, 0x16, 0x00, 0x00, bt, 0x00, r, g, b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, bs, 0x01, bd, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-//             0x00, 0x00, 0x00, 0x00, 0x00,
-//         ],
-//     ];
-//     wave
-// }

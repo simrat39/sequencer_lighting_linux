@@ -1,6 +1,9 @@
 use omen_rgb_test::{
     animation::Animation,
-    wave::{self, Color, CustomWaveColors, Wave},
+    animation_custom_colors::AnimationCustomColors,
+    animation_speed::AnimationSpeed,
+    color::Color,
+    color_cycle::{ColorCycle, ColorCycleTheme},
 };
 
 fn main() {
@@ -10,11 +13,25 @@ fn main() {
         if device.vendor_id() == 1008 && device.product_id() == 8001 {
             let dev = device.open_device(&hid).unwrap();
 
-            let config = Wave {
-                speed: Some(wave::WaveSpeed::Medium),
-                direction: Some(wave::WaveDirection::Down),
-                theme: Some(wave::WaveTheme::Galaxy),
-                custom_colors: Some(CustomWaveColors {
+            // let config = Wave {
+            //     speed: Some(wave::WaveSpeed::Fast),
+            //     direction: Some(wave::WaveDirection::Up),
+            //     theme: Some(wave::WaveTheme::Galaxy),
+            //     custom_colors: None,
+            //     // custom_colors: Some(CustomWaveColors {
+            //     //     colors: vec![
+            //     //         Color::from(0x00, 0xff, 0x00),
+            //     //         Color::from(0xff, 0xff, 0xff),
+            //     //         Color::from(0x00, 0x00, 0xff),
+            //     //         Color::from(0xff, 0x00, 0x00),
+            //     //     ],
+            //     // }),
+            // };
+
+            let config = ColorCycle {
+                theme: Some(ColorCycleTheme::Custom),
+                speed: Some(AnimationSpeed::Fast),
+                custom_colors: Some(AnimationCustomColors {
                     colors: vec![
                         Color::from(0x00, 0xff, 0x00),
                         Color::from(0xff, 0xff, 0xff),
