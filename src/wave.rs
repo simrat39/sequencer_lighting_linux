@@ -1,3 +1,5 @@
+use crate::animation::Animation;
+
 // pub fn get_wave(config: WaveConfig) -> Vec<Vec<u8>> {
 //     // binary direction
 //     let bd = config.binary_for_direction();
@@ -29,15 +31,18 @@
 //     wave
 // }
 
-pub struct WaveConfig {
+pub struct Wave {
     pub direction: Option<WaveDirection>,
     pub speed: Option<WaveSpeed>,
     pub theme: Option<WaveTheme>,
     pub custom_colors: Option<CustomWaveColors>,
 }
 
-impl WaveConfig {
-    pub fn from_bytes(&self, bytes: &mut Vec<u8>) {
+impl Animation for Wave {
+    fn get_modified_buf(&self) -> Vec<Vec<u8>> {
+        let mut empty_buf = Wave::get_empty_buf();
+        let bytes = &mut empty_buf[1];
+
         // idk 1
         bytes[0] = 0x03;
         // idk 2
@@ -82,10 +87,12 @@ impl WaveConfig {
                 }
             }
         }
+
+        empty_buf
     }
 }
 
-impl WaveConfig {
+impl Wave {
     pub fn binary_for_direction(&self) -> u8 {
         match &self.direction {
             Some(dir) => match dir {

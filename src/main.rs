@@ -1,6 +1,6 @@
 use omen_rgb_test::{
-    buf::get_empty_bufs,
-    wave::{self, Color, CustomWaveColors, WaveConfig},
+    animation::Animation,
+    wave::{self, Color, CustomWaveColors, Wave},
 };
 
 fn main() {
@@ -9,9 +9,9 @@ fn main() {
     for device in h.device_list().skip(2) {
         let dev = device.open_device(&h).unwrap();
 
-        let config = WaveConfig {
-            speed: Some(wave::WaveSpeed::Slow),
-            direction: Some(wave::WaveDirection::Up),
+        let config = Wave {
+            speed: Some(wave::WaveSpeed::Medium),
+            direction: Some(wave::WaveDirection::Down),
             theme: Some(wave::WaveTheme::Galaxy),
             custom_colors: Some(CustomWaveColors {
                 colors: vec![
@@ -23,8 +23,7 @@ fn main() {
             }),
         };
 
-        let mut wave_buf = get_empty_bufs();
-        config.from_bytes(&mut wave_buf[1]);
+        let wave_buf = config.get_modified_buf();
 
         for b in wave_buf {
             dev.write(b.as_slice()).unwrap();

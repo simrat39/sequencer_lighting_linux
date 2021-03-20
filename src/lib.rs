@@ -1,2 +1,2 @@
-pub mod buf;
+pub mod animation;
 pub mod wave;
