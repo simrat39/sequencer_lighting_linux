@@ -30,8 +30,12 @@ impl Animation for Wave {
         bytes[24] = self.binary_for_direction();
 
         // custom colors
-        if let Some(val) = &self.custom_colors {
-            val.set_colors_in_buffer(bytes);
+        if let Some(WaveTheme::Custom) = self.theme {
+            if let Some(val) = &self.custom_colors {
+                val.set_colors_in_buffer(bytes);
+            }
+        } else {
+            eprintln!("Custom colors provided but theme is not custom. Ignoring colors as they override the theme!");
         }
 
         empty_buf
