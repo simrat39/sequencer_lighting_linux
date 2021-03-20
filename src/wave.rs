@@ -78,7 +78,6 @@ impl Animation for Wave {
                         bytes[18] = color.b;
                     }
                     3 => {
-                        println!("m here ello");
                         bytes[19] = color.r;
                         bytes[20] = color.g;
                         bytes[21] = color.b;
