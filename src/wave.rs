@@ -20,6 +20,8 @@ impl Animation for Wave {
         bytes[0] = 0x03;
         // idk 2
         bytes[2] = 0x16;
+        // idk 3
+        bytes[6] = 0x04;
         // animation
         bytes[1] = 0x06;
         // speed
