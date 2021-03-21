@@ -1,6 +1,6 @@
 use crate::{
     animation::Animation, animation_custom_colors::AnimationCustomColors,
-    animation_speed::AnimationSpeed,
+    animation_speeds::AnimationSpeed,
 };
 
 pub struct Starlight {

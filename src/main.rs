@@ -1,9 +1,8 @@
 use omen_rgb_test::{
     animation::Animation,
     animation_custom_colors::AnimationCustomColors,
-    animation_speed::AnimationSpeed,
+    animation_speeds::AnimationSpeed,
     color::Color,
-    color_cycle::{ColorCycle, ColorCycleTheme},
     starlight::{Starlight, StarlightTheme},
 };
 
