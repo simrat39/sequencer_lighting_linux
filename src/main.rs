@@ -1,7 +1,7 @@
 use omen_rgb_test::{
     animation::Animation, animation_custom_colors::AnimationCustomColors,
-    animation_speeds::AnimationSpeed, animation_themes::AnimationThemes, breathing::Breathing,
-    color::Color, ghosting::Ghosting,
+    animation_speeds::AnimationSpeed, animation_themes::AnimationThemes, color::Color,
+    line_streak::LineStreak,
 };
 
 fn main() {
@@ -25,9 +25,9 @@ fn main() {
             //     }),
             // };
 
-            let config = Ghosting {
-                theme: Some(AnimationThemes::Custom),
-                speed: Some(AnimationSpeed::Slow),
+            let config = LineStreak {
+                theme: Some(AnimationThemes::Ocean),
+                speed: Some(AnimationSpeed::Fast),
                 custom_colors: Some(AnimationCustomColors {
                     colors: vec![
                         Color::from(0x00, 0xff, 0x00),

@@ -6,5 +6,6 @@ pub mod breathing;
 pub mod color;
 pub mod color_cycle;
 pub mod ghosting;
+pub mod line_streak;
 pub mod starlight;
 pub mod wave;
