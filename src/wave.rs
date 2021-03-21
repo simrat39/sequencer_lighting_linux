@@ -1,13 +1,13 @@
 use crate::{
     animation::Animation, animation_custom_colors::AnimationCustomColors,
-    animation_speeds::AnimationSpeed,
+    animation_speeds::AnimationSpeed, animation_themes::AnimationThemes,
 };
 
 #[derive(Debug)]
 pub struct Wave {
     pub direction: Option<WaveDirection>,
     pub speed: Option<AnimationSpeed>,
-    pub theme: Option<WaveTheme>,
+    pub theme: Option<AnimationThemes>,
     pub custom_colors: Option<AnimationCustomColors>,
 }
 
@@ -22,15 +22,16 @@ impl Animation for Wave {
         bytes[2] = 0x16;
         // animation
         bytes[1] = 0x06;
-        // theme
-        bytes[5] = self.binary_for_theme();
         // speed
         bytes[22] = self.binary_for_speed();
         // direction
         bytes[24] = self.binary_for_direction();
 
+        // theme
+        AnimationThemes::set_theme(&self.theme, bytes, true);
+
         // custom colors
-        if let Some(WaveTheme::Custom) = self.theme {
+        if let Some(AnimationThemes::Custom) = self.theme {
             if let Some(val) = &self.custom_colors {
                 val.set_colors_in_buffer(bytes);
             }
@@ -63,19 +64,6 @@ impl Wave {
             None => AnimationSpeed::default(),
         }
     }
-
-    fn binary_for_theme(&self) -> u8 {
-        match &self.theme {
-            Some(th) => match th {
-                WaveTheme::Custom => 0x01,
-                WaveTheme::Volcano => 0x02,
-                WaveTheme::Jungle => 0x03,
-                WaveTheme::Ocean => 0x04,
-                WaveTheme::Galaxy => 0x05,
-            },
-            None => 0x05, // Galaxy
-        }
-    }
 }
 
 #[derive(Debug)]
@@ -86,13 +74,4 @@ pub enum WaveDirection {
     Down,
     Inwards,
     Outwards,
-}
-
-#[derive(Debug)]
-pub enum WaveTheme {
-    Custom,
-    Volcano,
-    Jungle,
-    Ocean,
-    Galaxy,
 }
