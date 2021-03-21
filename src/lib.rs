@@ -1,13 +1,2 @@
 pub mod animation;
-pub mod animation_custom_colors;
-pub mod animation_speeds;
-pub mod animation_themes;
-pub mod breathing;
 pub mod color;
-pub mod color_cycle;
-pub mod ghosting;
-pub mod line_streak;
-pub mod raindrop;
-pub mod ripple;
-pub mod starlight;
-pub mod wave;

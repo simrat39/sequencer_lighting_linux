@@ -1,6 +1,7 @@
 use crate::{
-    animation::Animation, animation_custom_colors::AnimationCustomColors,
-    animation_speeds::AnimationSpeed, animation_themes::AnimationThemes,
+    animation::animation_custom_colors::AnimationCustomColors,
+    animation::animation_speeds::AnimationSpeed, animation::animation_themes::AnimationThemes,
+    animation::Animation,
 };
 
 #[derive(Debug)]

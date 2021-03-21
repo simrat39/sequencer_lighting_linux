@@ -1,17 +1,18 @@
 use crate::{
-    animation::Animation, animation_custom_colors::AnimationCustomColors,
-    animation_speeds::AnimationSpeed, animation_themes::AnimationThemes,
+    animation::animation_custom_colors::AnimationCustomColors,
+    animation::animation_speeds::AnimationSpeed, animation::animation_themes::AnimationThemes,
+    animation::Animation,
 };
 
-pub struct Breathing {
+pub struct Ghosting {
     pub theme: Option<AnimationThemes>,
     pub speed: Option<AnimationSpeed>,
     pub custom_colors: Option<AnimationCustomColors>,
 }
 
-impl Animation for Breathing {
+impl Animation for Ghosting {
     fn get_modified_buf(&self) -> Vec<Vec<u8>> {
-        let mut empty_buf = Breathing::get_empty_buf();
+        let mut empty_buf = Ghosting::get_empty_buf();
         let bytes = &mut empty_buf[1];
 
         // idk 1
@@ -21,7 +22,7 @@ impl Animation for Breathing {
         // idk 3
         bytes[6] = 0x04;
         // animation
-        bytes[1] = 0x03;
+        bytes[1] = 0x04;
         // speed
         bytes[22] = self.binary_for_speed();
 
@@ -41,7 +42,7 @@ impl Animation for Breathing {
     }
 }
 
-impl Breathing {
+impl Ghosting {
     fn binary_for_speed(&self) -> u8 {
         match &self.speed {
             Some(val) => AnimationSpeed::binary_for_speed(val),

@@ -1,10 +1,12 @@
 use omen_rgb_test::{
-    animation::Animation,
-    animation_custom_colors::AnimationCustomColors,
-    animation_speeds::AnimationSpeed,
-    animation_themes::AnimationThemes,
+    animation::{
+        animation_custom_colors::AnimationCustomColors,
+        animation_speeds::AnimationSpeed,
+        animation_themes::AnimationThemes,
+        ripple::{Ripple, RippleSize},
+        Animation,
+    },
     color::Color,
-    ripple::{Ripple, RippleSize},
 };
 
 fn main() {
