@@ -12,6 +12,11 @@ impl AnimationCustomColors {
         }
 
         let len = &self.colors.len();
+
+        if *len < 2 {
+            panic!("Atleast two custom colors are required!");
+        }
+
         if *len > 4 {
             eprintln!("More than 4 custom colors provided, only the first 4 will be considered");
         }
