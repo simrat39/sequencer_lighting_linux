@@ -1,7 +1,10 @@
 use omen_rgb_test::{
-    animation::Animation, animation_custom_colors::AnimationCustomColors,
-    animation_speeds::AnimationSpeed, animation_themes::AnimationThemes, color::Color,
-    line_streak::LineStreak, raindrop::Raindrop,
+    animation::Animation,
+    animation_custom_colors::AnimationCustomColors,
+    animation_speeds::AnimationSpeed,
+    animation_themes::AnimationThemes,
+    color::Color,
+    ripple::{Ripple, RippleSize},
 };
 
 fn main() {
@@ -25,9 +28,9 @@ fn main() {
             //     }),
             // };
 
-            let config = Raindrop {
-                theme: Some(AnimationThemes::Galaxy),
-                speed: Some(AnimationSpeed::Fast),
+            let config = Ripple {
+                theme: Some(AnimationThemes::Custom),
+                speed: Some(AnimationSpeed::Slow),
                 custom_colors: Some(AnimationCustomColors {
                     colors: vec![
                         Color::from(0x00, 0xff, 0x00),
@@ -36,6 +39,7 @@ fn main() {
                         Color::from(0xff, 0x00, 0x00),
                     ],
                 }),
+                direction: Some(RippleSize::Big),
             };
 
             let wave_buf = config.get_modified_buf();
