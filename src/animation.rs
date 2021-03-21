@@ -1,3 +1,5 @@
+use hidapi::HidDevice;
+
 pub mod animation_custom_colors;
 pub mod animation_speeds;
 pub mod animation_themes;
@@ -32,4 +34,12 @@ pub trait Animation {
     }
     // modified buffer with all the effects applied
     fn get_modified_buf(&self) -> Vec<Vec<u8>>;
+
+    fn apply_effect(&self, device: HidDevice) {
+        let buf = self.get_modified_buf();
+
+        for item in buf {
+            device.write(item.as_slice()).unwrap();
+        }
+    }
 }
