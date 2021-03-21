@@ -4,6 +4,7 @@ use omen_rgb_test::{
     animation_speed::AnimationSpeed,
     color::Color,
     color_cycle::{ColorCycle, ColorCycleTheme},
+    starlight::{Starlight, StarlightTheme},
 };
 
 fn main() {
@@ -28,8 +29,8 @@ fn main() {
             //     // }),
             // };
 
-            let config = ColorCycle {
-                theme: Some(ColorCycleTheme::Custom),
+            let config = Starlight {
+                theme: Some(StarlightTheme::Custom),
                 speed: Some(AnimationSpeed::Fast),
                 custom_colors: Some(AnimationCustomColors {
                     colors: vec![
