@@ -5,5 +5,6 @@ pub mod animation_themes;
 pub mod breathing;
 pub mod color;
 pub mod color_cycle;
+pub mod ghosting;
 pub mod starlight;
 pub mod wave;

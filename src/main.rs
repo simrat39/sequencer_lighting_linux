@@ -1,7 +1,7 @@
 use omen_rgb_test::{
     animation::Animation, animation_custom_colors::AnimationCustomColors,
     animation_speeds::AnimationSpeed, animation_themes::AnimationThemes, breathing::Breathing,
-    color::Color,
+    color::Color, ghosting::Ghosting,
 };
 
 fn main() {
@@ -25,9 +25,9 @@ fn main() {
             //     }),
             // };
 
-            let config = Breathing {
-                theme: Some(AnimationThemes::Volcano),
-                speed: Some(AnimationSpeed::Fast),
+            let config = Ghosting {
+                theme: Some(AnimationThemes::Custom),
+                speed: Some(AnimationSpeed::Slow),
                 custom_colors: Some(AnimationCustomColors {
                     colors: vec![
                         Color::from(0x00, 0xff, 0x00),
