@@ -1,7 +1,7 @@
 use omen_rgb_test::{
     animation::Animation, animation_custom_colors::AnimationCustomColors,
     animation_speeds::AnimationSpeed, animation_themes::AnimationThemes, color::Color,
-    line_streak::LineStreak,
+    line_streak::LineStreak, raindrop::Raindrop,
 };
 
 fn main() {
@@ -25,8 +25,8 @@ fn main() {
             //     }),
             // };
 
-            let config = LineStreak {
-                theme: Some(AnimationThemes::Ocean),
+            let config = Raindrop {
+                theme: Some(AnimationThemes::Galaxy),
                 speed: Some(AnimationSpeed::Fast),
                 custom_colors: Some(AnimationCustomColors {
                     colors: vec![
