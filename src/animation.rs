@@ -35,7 +35,7 @@ pub trait Animation {
     // modified buffer with all the effects applied
     fn get_modified_buf(&self) -> Vec<Vec<u8>>;
 
-    fn apply_effect(&self, device: HidDevice) {
+    fn apply_effect(&self, device: &HidDevice) {
         let buf = self.get_modified_buf();
 
         for item in buf {
