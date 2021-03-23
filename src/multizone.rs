@@ -1,5 +1,6 @@
 use hidapi::HidDevice;
 pub mod full_static;
+pub mod per_key;
 pub trait Multizone {
     // empty buffer for multizone colors
     fn get_empty_buf() -> Vec<Vec<u8>> {

@@ -1,16 +1,15 @@
-use std::{thread, time::Duration};
+use rand::{thread_rng, Rng};
+use std::{
+    collections::{hash_map, HashMap},
+    thread,
+    time::Duration,
+};
+use strum::IntoEnumIterator;
 
 use omen_rgb_test::{
-    animation::{
-        animation_custom_colors::AnimationCustomColors,
-        animation_speeds::AnimationSpeed,
-        animation_themes::AnimationThemes,
-        wave::{Wave, WaveDirection},
-        Animation,
-    },
     color::Color,
     multizone::{
-        full_static::{self, FullStatic},
+        per_key::{Key, PerKey},
         Multizone,
     },
 };
@@ -22,25 +21,21 @@ fn main() {
         if device.vendor_id() == 1008 && device.product_id() == 8001 {
             let dev = &device.open_device(&hid).unwrap();
 
-            // let config = Wave {
-            //     speed: Some(AnimationSpeed::Slow),
-            //     theme: Some(AnimationThemes::Custom),
-            //     custom_colors: Some(AnimationCustomColors {
-            //         colors: vec![
-            //             Color::from(0x00, 0xff, 0x00),
-            //             Color::from(0xff, 0xff, 0xff),
-            //             Color::from(0x00, 0x00, 0xff),
-            //             Color::from(0xff, 0x00, 0x00),
-            //         ],
-            //     }),
-            //     direction: Some(WaveDirection::Down),
-            // };
+            let mut rng = thread_rng();
+            loop {
+                let mut map = HashMap::new();
+                for key in Key::iter() {
+                    let r = rng.gen_range(0x00..0xff);
+                    let g = rng.gen_range(0x00..0xff);
+                    let b = rng.gen_range(0x00..0xff);
+                    map.insert(key, Color::from(r as u8, g as u8, b as u8));
+                }
 
-            let config = FullStatic {
-                color: Color::from(0xe5, 0x00, 0x00),
-            };
+                let config = PerKey { keys_colors: map };
 
-            config.apply_effect(dev);
+                config.apply_effect(dev);
+                thread::sleep(Duration::from_millis(200));
+            }
         }
     }
 }
