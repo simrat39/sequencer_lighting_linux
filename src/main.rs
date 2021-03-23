@@ -1,17 +1,10 @@
 use rand::{thread_rng, Rng};
-use std::{
-    collections::{hash_map, HashMap},
-    thread,
-    time::Duration,
-};
+use std::{collections::HashMap, thread, time::Duration};
 use strum::IntoEnumIterator;
 
 use omen_rgb_test::{
     color::Color,
-    multizone::{
-        per_key::{Key, PerKey},
-        Multizone,
-    },
+    multizone::{key::Key, per_key::PerKey, Multizone},
 };
 
 fn main() {
@@ -26,8 +19,8 @@ fn main() {
                 let mut map = HashMap::new();
                 for key in Key::iter() {
                     let r = rng.gen_range(0x00..0xff);
-                    let g = rng.gen_range(0x00..0xff);
-                    let b = rng.gen_range(0x00..0xff);
+                    let g = 0xff - r;
+                    let b = r / 2;
                     map.insert(key, Color::from(r as u8, g as u8, b as u8));
                 }
 

@@ -1,5 +1,6 @@
 use hidapi::HidDevice;
 pub mod full_static;
+pub mod key;
 pub mod per_key;
 pub trait Multizone {
     // empty buffer for multizone colors
