@@ -8,7 +8,7 @@ pub struct FullStatic {
 
 impl Multizone for FullStatic {
     fn get_modified_buf(&self) -> Vec<Vec<u8>> {
-        let mut empty = FullStatic::get_empty_buf();
+        let mut empty = self.get_empty_buf();
 
         for i in 3..6 {
             for j in 4..64 {

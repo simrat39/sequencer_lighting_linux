@@ -1,10 +1,13 @@
 use hidapi::HidDevice;
+pub mod animated_gradient;
+pub mod animation_api;
+pub mod custom_animation;
 pub mod full_static;
 pub mod key;
 pub mod per_key;
 pub trait Multizone {
     // empty buffer for multizone colors
-    fn get_empty_buf() -> Vec<Vec<u8>> {
+    fn get_empty_buf(&self) -> Vec<Vec<u8>> {
         vec![
             vec![
                 0x09, 0x00, 0x01, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

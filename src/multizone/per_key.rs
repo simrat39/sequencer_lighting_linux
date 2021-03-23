@@ -10,7 +10,7 @@ pub struct PerKey {
 
 impl Multizone for PerKey {
     fn get_modified_buf(&self) -> Vec<Vec<u8>> {
-        let mut empty = PerKey::get_empty_buf();
+        let mut empty = self.get_empty_buf();
 
         for (key, color) in self.keys_colors.iter() {
             let (i, j) = key.position_in_buffer_r();

@@ -1,12 +1,12 @@
 use strum_macros::EnumIter;
 
-#[derive(EnumIter, Debug, PartialEq, Eq, Hash)]
+#[derive(EnumIter, Debug, PartialEq, Eq, Hash, Clone, Copy)]
 pub enum Key {
     Escape,
     Backtick,
     Tab,
     Caps,
-    Shift,
+    ShiftLeft,
     ControlLeft,
     F12,
     Equals,
@@ -115,13 +115,96 @@ pub enum Key {
 }
 
 impl Key {
+    pub fn get_rows() -> Vec<Vec<Key>> {
+        vec![
+            vec![Key::P1, Key::P2, Key::P3, Key::P4, Key::P5],
+            vec![
+                Key::Escape,
+                Key::Backtick,
+                Key::Tab,
+                Key::Caps,
+                Key::ShiftLeft,
+                Key::ControlLeft,
+            ],
+            vec![Key::One, Key::Q, Key::A, Key::Z, Key::WindowsLeft],
+            vec![Key::F1, Key::Two, Key::W, Key::S, Key::X, Key::AltLeft],
+            vec![Key::F2, Key::Three, Key::E, Key::D, Key::C],
+            vec![Key::F3, Key::Four, Key::R, Key::F, Key::V],
+            vec![Key::F4, Key::Five, Key::T, Key::G, Key::B],
+            vec![Key::Six, Key::Y, Key::H, Key::N],
+            vec![Key::F5, Key::Seven, Key::U, Key::J, Key::M],
+            vec![Key::F6, Key::Eight, Key::I, Key::K, Key::Comma],
+            vec![
+                Key::F7,
+                Key::Nine,
+                Key::O,
+                Key::L,
+                Key::FullStop,
+                Key::AltRight,
+            ],
+            vec![
+                Key::F8,
+                Key::Zero,
+                Key::P,
+                Key::SemiColon,
+                Key::ForwardSlash,
+                Key::Fn,
+            ],
+            vec![Key::F9, Key::Dash, Key::SquareBracketOpen, Key::Apostrophe],
+            vec![Key::F10, Key::Equals, Key::SquareBracketClose],
+            vec![
+                Key::F11,
+                Key::F12,
+                Key::Backspace,
+                Key::Backslash,
+                Key::Enter,
+                Key::ShiftRight,
+                Key::WindowsRight,
+                Key::ControlRight,
+            ],
+            vec![Key::PrintScreen, Key::Insert, Key::Delete, Key::ArrowLeft],
+            vec![
+                Key::ScreenLock,
+                Key::Omen,
+                Key::End,
+                Key::ArrowUp,
+                Key::ArrowDown,
+            ],
+            vec![Key::Pause, Key::PageUp, Key::PageOn /* arrow right */],
+            vec![
+                Key::PlayPause,
+                Key::NumLock,
+                // num 7
+                Key::Num4,
+                Key::Num1,
+                Key::Num0,
+            ],
+            vec![
+                Key::Stop,
+                // num slash
+                Key::Num8,
+                Key::Num5,
+                Key::Num2,
+            ],
+            vec![
+                Key::Previous,
+                Key::NumStar,
+                Key::Num9,
+                Key::Num6,
+                Key::Num3,
+                Key::NumFullStop,
+            ],
+            vec![Key::Forward, Key::NumStar, Key::NumPlus, Key::NumEnter],
+        ]
+    }
+
     pub fn position_in_buffer_r(&self) -> (u8, u8) {
         match self {
             Key::Escape => (3, 4),
             Key::Backtick => (3, 5),
             Key::Tab => (3, 6),
             Key::Caps => (3, 7),
-            Key::Shift => (3, 8),
+            Key::ShiftLeft => (3, 8),
             Key::ControlLeft => (3, 9),
             Key::F12 => (3, 10),
             Key::Equals => (3, 11),
