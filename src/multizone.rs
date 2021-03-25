@@ -1,3 +1,5 @@
+use std::{thread, time::Duration};
+
 use hidapi::HidDevice;
 pub mod animated_gradient;
 pub mod animation_api;
@@ -5,6 +7,7 @@ pub mod custom_animation;
 pub mod full_static;
 pub mod key;
 pub mod per_key;
+pub mod shimmer;
 pub trait Multizone {
     // empty buffer for multizone colors
     fn get_empty_buf(&self) -> Vec<Vec<u8>> {
@@ -110,6 +113,7 @@ pub trait Multizone {
 
         for item in buf {
             device.write(item.as_slice()).unwrap();
+            thread::sleep(Duration::from_millis(1));
         }
     }
 }
