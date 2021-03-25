@@ -6,6 +6,7 @@ pub mod animation_api;
 pub mod custom_animation;
 pub mod full_static;
 pub mod key;
+pub mod mid_shimmer;
 pub mod per_key;
 pub mod shimmer;
 pub trait Multizone {
