@@ -1,7 +1,6 @@
 use std::{thread, time::Duration};
 
 use hidapi::HidDevice;
-pub mod animated_gradient;
 pub mod animation_api;
 pub mod custom_animation;
 pub mod full_static;
