@@ -1,6 +1,9 @@
-use omen_rgb_test::color::Color;
-use omen_rgb_test::multizone::{
-    custom_animation::CustomAnimation, full_static::FullStatic, mid_shimmer::MidShimmer,
+use omen_rgb_test::{
+    color::Color,
+    multizone::{
+        custom_animation::CustomAnimation, full_static::FullStatic, mid_shimmer::MidShimmer,
+        per_key::PerKey,
+    },
 };
 
 fn main() {
@@ -17,9 +20,10 @@ fn main() {
     let dev = last_omen_device.open_device(&hid).unwrap();
 
     let a = MidShimmer {
-        fg_color: Color::from(255, 0, 255),
-        bg_color: Color::from(0, 255, 0),
+        fg_color: Color::from(255, 255, 0),
+        bg_color: Color::from(0, 255, 255),
         device: &dev,
     };
+
     a.start::<FullStatic>();
 }

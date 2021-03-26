@@ -21,6 +21,7 @@ impl<'a> CustomAnimation for MidShimmer<'a> {
         const MID: usize = 11;
 
         let mut frames: Vec<Box<dyn Multizone>> = Vec::new();
+
         for i in 0..MID + 1 {
             let mut map: HashMap<Key, Color> = HashMap::new();
 
@@ -31,23 +32,16 @@ impl<'a> CustomAnimation for MidShimmer<'a> {
             let left_rows = rows.iter().skip(MID - i).take(i);
             for row in left_rows {
                 for key in row {
-                    for i in 1..10000 {
-                        let c = self.bg_color.lerp(&self.fg_color, i, 10000.0);
-                        map.insert(*key, c);
-                    }
+                    map.insert(*key, self.fg_color);
                 }
             }
 
             let right_rows = rows.iter().skip(MID).take(i + 1);
             for row in right_rows {
                 for key in row {
-                    for i in 1..10000 {
-                        let c = self.bg_color.lerp(&self.fg_color, i, 10000.0);
-                        map.insert(*key, c);
-                    }
+                    map.insert(*key, self.fg_color);
                 }
             }
-
             frames.push(Box::new(PerKey { keys_colors: map }));
         }
 
@@ -61,20 +55,14 @@ impl<'a> CustomAnimation for MidShimmer<'a> {
             let left_rows = rows.iter().skip(MID - i).take(i);
             for row in left_rows {
                 for key in row {
-                    for i in 1..10000 {
-                        let c = self.fg_color.lerp(&self.bg_color, i, 10000.0);
-                        map.insert(*key, c);
-                    }
+                    map.insert(*key, self.bg_color);
                 }
             }
 
             let right_rows = rows.iter().skip(MID).take(i + 1);
             for row in right_rows {
                 for key in row {
-                    for i in 1..10000 {
-                        let c = self.fg_color.lerp(&self.bg_color, i, 10000.0);
-                        map.insert(*key, c);
-                    }
+                    map.insert(*key, self.bg_color);
                 }
             }
 
