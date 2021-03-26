@@ -14,8 +14,8 @@ impl<'a> AnimationApi<'a> {
     pub fn run_animation_loop(&self) {
         loop {
             for frame in &self.frames {
-                thread::sleep(self.delay);
                 frame.apply_effect(&self.device);
+                thread::sleep(self.delay);
             }
         }
     }

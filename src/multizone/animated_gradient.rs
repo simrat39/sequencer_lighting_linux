@@ -26,7 +26,7 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             let mut map: HashMap<Key, Color> = HashMap::new();
 
             // first four
-            let first_four_color = self.color1.lerp(&self.color2, i);
+            let first_four_color = self.color1.lerp(&self.color2, i, 100.0);
             for row in rows.iter().take(4) {
                 for key in row {
                     map.insert(*key, first_four_color);
@@ -34,10 +34,11 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // next four
-            let five_to_eight_color = self
-                .color1
-                .lerp(&self.color2, 20)
-                .lerp(&self.color2.lerp(&self.color1, 20), i);
+            let five_to_eight_color = self.color1.lerp(&self.color2, 20, 100.0).lerp(
+                &self.color2.lerp(&self.color1, 20, 100.0),
+                i,
+                100.0,
+            );
             for row in rows.iter().skip(4).take(4) {
                 for key in row {
                     map.insert(*key, five_to_eight_color);
@@ -45,10 +46,11 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // next four
-            let nine_to_twelve_color = self
-                .color1
-                .lerp(&self.color2, 40)
-                .lerp(&self.color2.lerp(&self.color1, 40), i);
+            let nine_to_twelve_color = self.color1.lerp(&self.color2, 40, 100.0).lerp(
+                &self.color2.lerp(&self.color1, 40, 100.0),
+                i,
+                100.0,
+            );
             for row in rows.iter().skip(8).take(4) {
                 for key in row {
                     map.insert(*key, nine_to_twelve_color);
@@ -56,10 +58,11 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // next four
-            let thirteen_to_sixteen_color = self
-                .color1
-                .lerp(&self.color2, 70)
-                .lerp(&self.color2.lerp(&self.color1, 70), i);
+            let thirteen_to_sixteen_color = self.color1.lerp(&self.color2, 70, 100.0).lerp(
+                &self.color2.lerp(&self.color1, 70, 100.0),
+                i,
+                100.0,
+            );
             for row in rows.iter().skip(12).take(4) {
                 for key in row {
                     map.insert(*key, thirteen_to_sixteen_color);
@@ -67,7 +70,7 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // first four
-            let last_colors = self.color2.lerp(&self.color1, i);
+            let last_colors = self.color2.lerp(&self.color1, i, 100.0);
             for row in rows.iter().skip(16) {
                 for key in row {
                     map.insert(*key, last_colors);
@@ -82,7 +85,7 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             let mut map: HashMap<Key, Color> = HashMap::new();
 
             // first four
-            let first_four_color = self.color2.lerp(&self.color1, i);
+            let first_four_color = self.color2.lerp(&self.color1, i, 100.0);
             for row in rows.iter().take(4) {
                 for key in row {
                     map.insert(*key, first_four_color);
@@ -90,10 +93,11 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // next four
-            let five_to_eight_color = self
-                .color2
-                .lerp(&self.color1, 20)
-                .lerp(&self.color1.lerp(&self.color2, 20), i);
+            let five_to_eight_color = self.color2.lerp(&self.color1, 20, 100.0).lerp(
+                &self.color1.lerp(&self.color2, 20, 100.0),
+                i,
+                100.0,
+            );
             for row in rows.iter().skip(4).take(4) {
                 for key in row {
                     map.insert(*key, five_to_eight_color);
@@ -101,10 +105,11 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // next four
-            let nine_to_twelve_color = self
-                .color2
-                .lerp(&self.color1, 40)
-                .lerp(&self.color1.lerp(&self.color2, 40), i);
+            let nine_to_twelve_color = self.color2.lerp(&self.color1, 40, 100.0).lerp(
+                &self.color1.lerp(&self.color2, 40, 100.0),
+                i,
+                100.0,
+            );
             for row in rows.iter().skip(8).take(4) {
                 for key in row {
                     map.insert(*key, nine_to_twelve_color);
@@ -112,10 +117,11 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // next four
-            let thirteen_to_sixteen_color = self
-                .color2
-                .lerp(&self.color1, 70)
-                .lerp(&self.color1.lerp(&self.color2, 70), i);
+            let thirteen_to_sixteen_color = self.color2.lerp(&self.color1, 70, 100.0).lerp(
+                &self.color1.lerp(&self.color2, 70, 100.0),
+                i,
+                100.0,
+            );
             for row in rows.iter().skip(12).take(4) {
                 for key in row {
                     map.insert(*key, thirteen_to_sixteen_color);
@@ -123,7 +129,7 @@ impl<'a> CustomAnimation for AnimatedGradient<'a> {
             }
 
             // first four
-            let last_colors = self.color1.lerp(&self.color2, i);
+            let last_colors = self.color1.lerp(&self.color2, i, 100.0);
             for row in rows.iter().skip(16) {
                 for key in row {
                     map.insert(*key, last_colors);

@@ -31,14 +31,20 @@ impl<'a> CustomAnimation for MidShimmer<'a> {
             let left_rows = rows.iter().skip(MID - i).take(i);
             for row in left_rows {
                 for key in row {
-                    map.insert(*key, self.fg_color);
+                    for i in 1..10000 {
+                        let c = self.bg_color.lerp(&self.fg_color, i, 10000.0);
+                        map.insert(*key, c);
+                    }
                 }
             }
 
             let right_rows = rows.iter().skip(MID).take(i + 1);
             for row in right_rows {
                 for key in row {
-                    map.insert(*key, self.fg_color);
+                    for i in 1..10000 {
+                        let c = self.bg_color.lerp(&self.fg_color, i, 10000.0);
+                        map.insert(*key, c);
+                    }
                 }
             }
 
@@ -55,14 +61,20 @@ impl<'a> CustomAnimation for MidShimmer<'a> {
             let left_rows = rows.iter().skip(MID - i).take(i);
             for row in left_rows {
                 for key in row {
-                    map.insert(*key, self.bg_color);
+                    for i in 1..10000 {
+                        let c = self.fg_color.lerp(&self.bg_color, i, 10000.0);
+                        map.insert(*key, c);
+                    }
                 }
             }
 
             let right_rows = rows.iter().skip(MID).take(i + 1);
             for row in right_rows {
                 for key in row {
-                    map.insert(*key, self.bg_color);
+                    for i in 1..10000 {
+                        let c = self.fg_color.lerp(&self.bg_color, i, 10000.0);
+                        map.insert(*key, c);
+                    }
                 }
             }
 

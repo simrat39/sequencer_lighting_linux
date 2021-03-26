@@ -12,15 +12,11 @@ impl Color {
         Color { r, g, b }
     }
 
-    pub fn lerp(&self, to: &Color, t: u8) -> Color {
-        if !(0..=100).contains(&t) {
-            panic!("t needs to be between 0 and 100");
-        }
-
+    pub fn lerp(&self, to: &Color, t: u64, max: f64) -> Color {
         let prisma_col = Rgb::new(self.r, self.g, self.b);
         let prisma_col_to = Rgb::new(to.r, to.g, to.b);
 
-        let ret_col = prisma_col.lerp(&prisma_col_to, t as f64 / 100.0);
+        let ret_col = prisma_col.lerp(&prisma_col_to, t as f64 / max);
 
         Color::from(ret_col.red(), ret_col.green(), ret_col.blue())
     }
